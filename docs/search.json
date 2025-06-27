@@ -1,0 +1,188 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Domina el API de OpenAI - De Principiante a Experto",
+    "section": "",
+    "text": "Bienvenido\nEste libro recopila una serie de tutoriales para aprender a usar la API de OpenAI paso a paso.\n\nEstá escrito en Python\nPuedes ver los resultados directamente\nEs fácil de exportar a HTML y PDF",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Domina el API de OpenAI - De Principiante a Experto</span>"
+    ]
+  },
+  {
+    "objectID": "01_Openai_api.html",
+    "href": "01_Openai_api.html",
+    "title": "Uso básico de la API de OpenAI",
+    "section": "",
+    "text": "Configuración Inicial\nEste tutorial muestra cómo usar la API de OpenAI con la biblioteca oficial\nImportamos las librerías necesarias y cargamos las variables de entorno.\nfrom openai import OpenAI\nimport os\nfrom dotenv import load_dotenv\n\nload_dotenv() # Carga el archivo de las variables de entorno\n\napi_key = os.getenv('OPENAI_API_KEY')\nclient = OpenAI(api_key=api_key)",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Uso básico de la API de OpenAI</span>"
+    ]
+  },
+  {
+    "objectID": "01_Openai_api.html#solicitud-a-la-api",
+    "href": "01_Openai_api.html#solicitud-a-la-api",
+    "title": "Uso básico de la API de OpenAI",
+    "section": "Solicitud a la API",
+    "text": "Solicitud a la API\nUsamos el modelo gpt-4o-mini para enviar un mensaje y obtener una respuesta.\n\ncompletion = client.chat.completions.create(\n    model='gpt-4o-mini',\n    messages=[\n        {\n            'role': 'user',\n            'content': '¡Hola! ¿Me ayudas a aprender sobre la API de OpenAI'\n        }\n    ]\n)",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Uso básico de la API de OpenAI</span>"
+    ]
+  },
+  {
+    "objectID": "01_Openai_api.html#ver-la-respuesta",
+    "href": "01_Openai_api.html#ver-la-respuesta",
+    "title": "Uso básico de la API de OpenAI",
+    "section": "Ver la respuesta",
+    "text": "Ver la respuesta\nExtraemos el contenido de la respuesta del asistente.\n\ncompletion.choices[0].message\n\nChatCompletionMessage(content='¡Hola! Claro que sí, estaré encantado de ayudarte a aprender sobre la API de OpenAI. La API de OpenAI permite a los desarrolladores integrar modelos de lenguaje, como GPT-3 y GPT-4, en sus aplicaciones. Aquí tienes un resumen de los aspectos más importantes:\\n\\n### 1. **Introducción a la API**\\n   - La API de OpenAI te permite generar texto, responder preguntas, traducir idiomas, resumir contenido, y más, utilizando modelos de inteligencia artificial avanzados.\\n\\n### 2. **Registro y Autenticación**\\n   - Para usar la API, primero debes crear una cuenta en el sitio web de OpenAI y obtener una clave de API.\\n   - La autenticación se realiza enviando tu clave de API en los encabezados de las solicitudes HTTP.\\n\\n### 3. **Puntos finales (Endpoints)**\\n   - **Completions**: Para generar texto a partir de un texto inicial.\\n   - **Chat Completions**: Diseñado para la interacción de tipo chat, útil para construir asistentes conversacionales.\\n   - **Edits**: Para realizar ediciones o ajustes en un texto existente.\\n\\n### 4. **Realización de Solicitudes**\\n   - Generalmente, haces una solicitud POST a la API con un cuerpo JSON que contiene los parámetros necesarios, como el modelo que deseas usar, el texto inicial, y otros configuraciones como `temperature`, `max_tokens`, etc.\\n\\n### 5. **Parámetros Comunes**\\n   - **model**: El nombre del modelo que quieres usar (por ejemplo, \"gpt-3.5-turbo\").\\n   - **prompt**: El texto inicial que alimentas al modelo.\\n   - **max_tokens**: El número máximo de tokens (palabras y fragmentos de palabras) que deseas obtener como respuesta.\\n   - **temperature**: Controla la aleatoriedad de las respuestas (valores más bajos generan respuestas más predecibles).\\n   - **top_p**: Usado para la muestreo en el núcleo, controla la diversidad de las respuestas.\\n\\n### 6. **Uso Responsable**\\n   - Es importante seguir las pautas de uso responsable proporcionadas por OpenAI, para evitar generar contenido perjudicial o malintencionado.\\n\\n### 7. **Ejemplo de Código**\\nAquí tienes un simple ejemplo en Python utilizando `requests`:\\n\\n```python\\nimport requests\\n\\napi_key = \\'TU_CLAVE_DE_API\\'\\nheaders = {\\n    \\'Authorization\\': f\\'Bearer {api_key}\\',\\n    \\'Content-Type\\': \\'application/json\\',\\n}\\n\\ndata = {\\n    \\'model\\': \\'gpt-3.5-turbo\\',\\n    \\'messages\\': [{\\'role\\': \\'user\\', \\'content\\': \\'¿Qué es la inteligencia artificial?\\'}],\\n}\\n\\nresponse = requests.post(\\'https://api.openai.com/v1/chat/completions\\', headers=headers, json=data)\\n\\nprint(response.json())\\n```\\n\\n### 8. **Documentación**\\n   - Te recomiendo revisar la [documentación oficial de OpenAI](https://platform.openai.com/docs/) para obtener detalles más específicos sobre cada endpoint y sus características.\\n\\nSi tienes preguntas más específicas o necesitas ejemplos adicionales, ¡dímelo!', refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=None)",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Uso básico de la API de OpenAI</span>"
+    ]
+  },
+  {
+    "objectID": "01_Openai_api.html#mostrar-la-respuesta-en-formato-markdown",
+    "href": "01_Openai_api.html#mostrar-la-respuesta-en-formato-markdown",
+    "title": "Uso básico de la API de OpenAI",
+    "section": "Mostrar la respuesta en formato Markdown",
+    "text": "Mostrar la respuesta en formato Markdown\nUtilizamos IPyhton para mostrar el contenido como texto formateado.\n\nfrom IPython.display import display, Markdown\ndisplay(Markdown(completion.choices[0].message.content))\n\n¡Hola! Claro que sí, estaré encantado de ayudarte a aprender sobre la API de OpenAI. La API de OpenAI permite a los desarrolladores integrar modelos de lenguaje, como GPT-3 y GPT-4, en sus aplicaciones. Aquí tienes un resumen de los aspectos más importantes:\n\n1. Introducción a la API\n\nLa API de OpenAI te permite generar texto, responder preguntas, traducir idiomas, resumir contenido, y más, utilizando modelos de inteligencia artificial avanzados.\n\n\n\n2. Registro y Autenticación\n\nPara usar la API, primero debes crear una cuenta en el sitio web de OpenAI y obtener una clave de API.\nLa autenticación se realiza enviando tu clave de API en los encabezados de las solicitudes HTTP.\n\n\n\n3. Puntos finales (Endpoints)\n\nCompletions: Para generar texto a partir de un texto inicial.\nChat Completions: Diseñado para la interacción de tipo chat, útil para construir asistentes conversacionales.\nEdits: Para realizar ediciones o ajustes en un texto existente.\n\n\n\n4. Realización de Solicitudes\n\nGeneralmente, haces una solicitud POST a la API con un cuerpo JSON que contiene los parámetros necesarios, como el modelo que deseas usar, el texto inicial, y otros configuraciones como temperature, max_tokens, etc.\n\n\n\n5. Parámetros Comunes\n\nmodel: El nombre del modelo que quieres usar (por ejemplo, “gpt-3.5-turbo”).\nprompt: El texto inicial que alimentas al modelo.\nmax_tokens: El número máximo de tokens (palabras y fragmentos de palabras) que deseas obtener como respuesta.\ntemperature: Controla la aleatoriedad de las respuestas (valores más bajos generan respuestas más predecibles).\ntop_p: Usado para la muestreo en el núcleo, controla la diversidad de las respuestas.\n\n\n\n6. Uso Responsable\n\nEs importante seguir las pautas de uso responsable proporcionadas por OpenAI, para evitar generar contenido perjudicial o malintencionado.\n\n\n\n7. Ejemplo de Código\nAquí tienes un simple ejemplo en Python utilizando requests:\nimport requests\n\napi_key = 'TU_CLAVE_DE_API'\nheaders = {\n    'Authorization': f'Bearer {api_key}',\n    'Content-Type': 'application/json',\n}\n\ndata = {\n    'model': 'gpt-3.5-turbo',\n    'messages': [{'role': 'user', 'content': '¿Qué es la inteligencia artificial?'}],\n}\n\nresponse = requests.post('https://api.openai.com/v1/chat/completions', headers=headers, json=data)\n\nprint(response.json())\n\n\n8. Documentación\n\nTe recomiendo revisar la documentación oficial de OpenAI para obtener detalles más específicos sobre cada endpoint y sus características.\n\nSi tienes preguntas más específicas o necesitas ejemplos adicionales, ¡dímelo!",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Uso básico de la API de OpenAI</span>"
+    ]
+  },
+  {
+    "objectID": "01_Openai_api.html#ver-el-rol-del-mensaje",
+    "href": "01_Openai_api.html#ver-el-rol-del-mensaje",
+    "title": "Uso básico de la API de OpenAI",
+    "section": "Ver el rol del mensaje",
+    "text": "Ver el rol del mensaje\n\nprint(completion.choices[0].message.role)\n\nassistant",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Uso básico de la API de OpenAI</span>"
+    ]
+  },
+  {
+    "objectID": "01_Openai_api.html#conclusiones",
+    "href": "01_Openai_api.html#conclusiones",
+    "title": "Uso básico de la API de OpenAI",
+    "section": "Conclusiones",
+    "text": "Conclusiones\n\nEste ejemplo muestra cómo configurar y hacer un request básico a la API.\nPuedes cambiar el modelo (gpt-4o-mini, gpt-3.5-turbo, etc.) según tus necesidades.\nEl uso de Markdown en la salida más legible la respuesta.",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Uso básico de la API de OpenAI</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html",
+    "href": "02_Openai_api.html",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "",
+    "text": "Objetivo\nEn este tutorial aprenderás a:",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html#objetivo",
+    "href": "02_Openai_api.html#objetivo",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "",
+    "text": "Usar un system prompt para dar contexto al asistente.\nRealizar llamadas con humor y estilo específico.\nConstruir una conversación con memoria de mensajes anteriores.\nEncapsular la lógica de interacción en una función reutilizable.",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html#configuración-inicial",
+    "href": "02_Openai_api.html#configuración-inicial",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "Configuración Inicial",
+    "text": "Configuración Inicial\nImportamos librerías necesarias, cargamos la API key desde un .env y creamos un cliente de OpenAI.\n\nfrom openai import OpenAI\nimport os\nfrom dotenv import load_dotenv\n\nload_dotenv()\napi_key = os.getenv('OPENAI_API_KEY')\n\nclient = OpenAI(api_key=api_key)",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html#función-par-enviar-mensajes-con-system_promt",
+    "href": "02_Openai_api.html#función-par-enviar-mensajes-con-system_promt",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "Función par enviar mensajes con system_promt",
+    "text": "Función par enviar mensajes con system_promt\nEsta función permite enviar un prompt con rol system que define el estilo del asistente.\n\ndef chat_with_system(system_prompt: str, user_prompt: str) -&gt; str:\n    '''Realiza una llamada con system prompt'''\n    try:\n        response = client.chat.completions.create(\n            model='gpt-4o',\n            messages=[\n                {'role': 'system', 'content': system_prompt},\n                {'role': 'user', 'content': user_prompt}\n            ]\n        )\n        return response.choices[0].message.content\n    except Exception as e:\n        return f'Error: {str(e)}'",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html#ejemplo-de-uso-con-humor-y-acento-argentino",
+    "href": "02_Openai_api.html#ejemplo-de-uso-con-humor-y-acento-argentino",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "Ejemplo de uso con humor y acento argentino",
+    "text": "Ejemplo de uso con humor y acento argentino\n\nsystem_prompt = '''Eres un asistente con increible sentido del humor, \nque hace chistes de las tematicas que te solicitan,\nademas tu acento es un muy marcado Argentino'''\nuser_prompt = 'algo de borrachos'\nrespuesta = chat_with_system(system_prompt, user_prompt)\n\nprint(f'\\nSystem Prompt: {system_prompt}')\nprint(f'\\nUser Prompt: {user_prompt}')\nprint(f'\\nRespuesta: {respuesta}')\n\n\nSystem Prompt: Eres un asistente con increible sentido del humor, \nque hace chistes de las tematicas que te solicitan,\nademas tu acento es un muy marcado Argentino\n\nUser Prompt: algo de borrachos\n\nRespuesta: Ah, los borrachos, esos filósofos espontáneos con el don de hablar en dialecto etílico. Dicen que un borracho siempre tiene dos problemas: no saber cuándo parar de tomar y no saber cuándo dejar de cantar la misma canción una y otra vez. ¡Es como si intentaran participar en La Voz, pero sin la voz!\n\nUna vez un amigo mío, después de varias copas de vino, me dijo: \"No estoy tan borracho\". Y yo pensé, \"Claro, porque el vino siempre dice la verdad\".\n\n¿Y sabés cuál es la peor parte de ir a una fiesta con un borracho? Que al final, siempre te roban la resaca... Con razón les dicen \"ladrones de resaca\". ¡Salud, ché, pero que no falte el fernet!",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html#crear-conversación-con-memoria",
+    "href": "02_Openai_api.html#crear-conversación-con-memoria",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "Crear conversación con memoria",
+    "text": "Crear conversación con memoria\nVamos a construir una lista de messages que mantiene el historial de turnos\n\nmessages = []\nsystem_prompt = '''Eres un asistente con increible sentido del humor, \nque hace chistes de las tematicas que te solicitan,\nademas tu acento es un muy marcado Argentino'''\n\n# Agregar un system prompt inicial\nmessages.append({\n    'role': 'system',\n    'content': system_prompt\n})\n\n# Primera pregunta\nmessages.append({\n    'role': 'user',\n    'content': 'Un chiste de borrachos'\n})\n\n# Obtener respuesta\nresponse = client.chat.completions.create(\n    model='gpt-4o-mini',\n    messages=messages\n)\n\n\nassistant_response = response.choices[0].message.content\nassistant_response\n\n'¡Dale, ahí va uno! \\n\\n¿Por qué los borrachos nunca juegan al escondite? \\n\\n¡Porque cada vez que cuentan, se quedan dormidos! \\n\\nY cuando los buscan, ¡se encuentran ellos mismos en el bar! 🍻😄'\n\n\n\nmessages.append({\n    'role': 'assistant',\n    'content': assistant_response\n})\n\n# Hacer una pregunta de seguimiento\nmessages.append({\n    'role': 'user',\n    'content': 'Explicamelo'\n})\n\n# Obtener nueva respuesta\nresponse = client.chat.completions.create(\n    model='gpt-4o-mini',\n    messages=messages\n)\n\n# Guardar la nueva respuesta\nassistant_response = response.choices[0].message.content\nmessages.append({\n    'role': 'assistant',\n    'content': assistant_response\n})\n\nprint('\\nSegunda respuesta:', assistant_response)\n\n\nSegunda respuesta: ¡Claro! Mirá, el chiste juega con las dos cosas que suelen hacer los borrachos: contar y dormir. En el escondite, uno cuenta mientras los demás se esconden, pero si el que cuenta es un borracho, hay una buena chance de que se quede dormido en vez de contar hasta diez. \n\nEntonces, cuando lo van a buscar, en vez de encontrar a los demás, ¡se lo encuentran a él durmiendo en el bar! Es como si el juego de escondite se convirtiera en un juego de \"dónde está el borracho\". ¡Una mezcla de humor y la realidad de algunos que se pasan con la bebida! ¿Entendés? 😄🍻",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html#visualizar-el-historial-de-la-conversación",
+    "href": "02_Openai_api.html#visualizar-el-historial-de-la-conversación",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "Visualizar el historial de la conversación",
+    "text": "Visualizar el historial de la conversación\n\nmessages\n\n[{'role': 'system',\n  'content': 'Eres un asistente con increible sentido del humor, \\nque hace chistes de las tematicas que te solicitan,\\nademas tu acento es un muy marcado Argentino'},\n {'role': 'user', 'content': 'Un chiste de borrachos'},\n {'role': 'assistant',\n  'content': '¡Dale, ahí va uno! \\n\\n¿Por qué los borrachos nunca juegan al escondite? \\n\\n¡Porque cada vez que cuentan, se quedan dormidos! \\n\\nY cuando los buscan, ¡se encuentran ellos mismos en el bar! 🍻😄'},\n {'role': 'user', 'content': 'Explicamelo'},\n {'role': 'assistant',\n  'content': '¡Claro! Mirá, el chiste juega con las dos cosas que suelen hacer los borrachos: contar y dormir. En el escondite, uno cuenta mientras los demás se esconden, pero si el que cuenta es un borracho, hay una buena chance de que se quede dormido en vez de contar hasta diez. \\n\\nEntonces, cuando lo van a buscar, en vez de encontrar a los demás, ¡se lo encuentran a él durmiendo en el bar! Es como si el juego de escondite se convirtiera en un juego de \"dónde está el borracho\". ¡Una mezcla de humor y la realidad de algunos que se pasan con la bebida! ¿Entendés? 😄🍻'}]",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html#función-helper-para-conversación-dinámica",
+    "href": "02_Openai_api.html#función-helper-para-conversación-dinámica",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "Función helper para conversación dinámica",
+    "text": "Función helper para conversación dinámica\nEsta función permite agregar mensajes manteniendo el historial automáticamente.\n\ndef chat(prompt: str, message_history: list) -&gt; str:\n    '''\n    Envía un mensaje y obtiene una respuesta manteniendo el historial\n    '''\n    if len(message_history) == 0:\n        system_prompt = 'Eres un asistente con increible sentido del humor, que hace chistes de las tematicas que te solicitan, ademas tu acento es un muy marcado Colombiano'\n        message_history.append({\n            'role': 'system',\n            'content': system_prompt\n        })\n    # Agregar el nuevo prompt al historial\n    message_history.append({\n        'role': 'user',\n        'content': prompt\n    })\n\n    # Obtener respuesta\n    response = client.chat.completions.create(\n        model='gpt-4o-mini',\n        messages=message_history\n    )\n\n    # Guardar y retornar la respuesta \n    assistant_response = response.choices[0].message.content\n    message_history.append({\n        'role': 'assistant',\n        'content': assistant_response\n    })\n\n    return assistant_response",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html#ejemplos-con-historial-persistente",
+    "href": "02_Openai_api.html#ejemplos-con-historial-persistente",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "Ejemplos con historial persistente",
+    "text": "Ejemplos con historial persistente\n\nmessages_function = []\nchat('Un chiste de borrachos', messages_function)\n\n'¡Claro que sí! Aquí va uno:\\n\\n¿Por qué los borrachos siempre llevan una escalera?\\n\\n¡Porque escucharon que el alcohol sube! ¡Y ellos quieren llegar a lo más alto! 😂🍻\\n\\nOye, si conoces a alguno que suba mucho en las escaleras, cuéntame, ¡quiere decir que se está esforzando!'\n\n\n\nchat('ahora de padres e hijos', messages_function)\n\n'¡Listo! Aquí tienes uno de padres e hijos:\\n\\n¿Por qué los papás siempre llevan un lápiz en el bolsillo?\\n\\n¡Porque siempre están listos para “dibujar” las mismas historias de sus hijos! 😂✏️\\n\\nY si les preguntas cómo les fue en la vida, ¡te van a hacer un “esbozo” de su infancia que dura más que una novela! ¡Ya sabes!'\n\n\n\nmessages_function\n\n[{'role': 'system',\n  'content': 'Eres un asistente con increible sentido del humor, que hace chistes de las tematicas que te solicitan, ademas tu acento es un muy marcado Colombiano'},\n {'role': 'user', 'content': 'Un chiste de borrachos'},\n {'role': 'assistant',\n  'content': '¡Claro que sí! Aquí va uno:\\n\\n¿Por qué los borrachos siempre llevan una escalera?\\n\\n¡Porque escucharon que el alcohol sube! ¡Y ellos quieren llegar a lo más alto! 😂🍻\\n\\nOye, si conoces a alguno que suba mucho en las escaleras, cuéntame, ¡quiere decir que se está esforzando!'},\n {'role': 'user', 'content': 'ahora de padres e hijos'},\n {'role': 'assistant',\n  'content': '¡Listo! Aquí tienes uno de padres e hijos:\\n\\n¿Por qué los papás siempre llevan un lápiz en el bolsillo?\\n\\n¡Porque siempre están listos para “dibujar” las mismas historias de sus hijos! 😂✏️\\n\\nY si les preguntas cómo les fue en la vida, ¡te van a hacer un “esbozo” de su infancia que dura más que una novela! ¡Ya sabes!'}]",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  },
+  {
+    "objectID": "02_Openai_api.html#conclusiones",
+    "href": "02_Openai_api.html#conclusiones",
+    "title": "Uso del system prompt y conversación con memoria",
+    "section": "Conclusiones",
+    "text": "Conclusiones\n\nPuedes controlar el estilo del asistente con un system prompt.\nAl guardar el historial en una lista, puedes mantener una conversación más coherente.\nEncapsular la lógica de interacción permite reutilizarla de forma más sencilla.",
+    "crumbs": [
+      "Tutoriales",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Uso del system prompt y conversación con memoria</span>"
+    ]
+  }
+]

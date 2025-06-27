@@ -1,0 +1,43 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Domina el API de OpenAI - De Principiante a Experto"
+  reader-mode: false
+  author: "Edwin John Fredy Reyes Aguirre"
+  date: today
+
+  sidebar:
+    search: true
+    style: docked
+
+
+  # En esta seccion se enlaza el repositorio de GitHub
+  repo-url: https://github.com/JohnReyes02/curso_openai_api
+  repo-branch: main
+  repo-actions: [edit, issue, source]
+  sharing: [twitter, facebook, linkedin]
+
+  chapters:
+    - index.qmd
+    - part: Tutoriales
+      chapters:
+        - 01_Openai_api.qmd
+        - 02_Openai_api.qmd
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    code-link: false
+    toc: true
+    toc-title: "Contenido"
+    number-sections: false
+    code-copy: false # Para que se habilite copiar el codigo
+    code-overflow: scroll
+    fig-align: center
+  pdf:
+    documentclass: scrreprt
+    toc: true

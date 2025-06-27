@@ -1,0 +1,66 @@
+# Uso básico de la API de OpenAI
+
+Este tutorial muestra cómo usar la API de OpenAI con la biblioteca oficial
+
+
+## Configuración Inicial
+
+Importamos las librerías necesarias y cargamos las variables de entorno.
+
+
+```{python}
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+load_dotenv() # Carga el archivo de las variables de entorno
+
+api_key = os.getenv('OPENAI_API_KEY')
+client = OpenAI(api_key=api_key)
+```
+
+## Solicitud a la API
+
+Usamos el modelo gpt-4o-mini para enviar un mensaje y obtener una respuesta.
+
+
+```{python}
+completion = client.chat.completions.create(
+    model='gpt-4o-mini',
+    messages=[
+        {
+            'role': 'user',
+            'content': '¡Hola! ¿Me ayudas a aprender sobre la API de OpenAI'
+        }
+    ]
+)
+```
+
+## Ver la respuesta
+
+Extraemos el contenido de la respuesta del asistente.
+
+```{python}
+completion.choices[0].message
+```
+
+## Mostrar la respuesta en formato Markdown
+
+Utilizamos IPyhton para mostrar el contenido como texto formateado.
+
+```{python}
+from IPython.display import display, Markdown
+display(Markdown(completion.choices[0].message.content))
+```
+
+## Ver el rol del mensaje
+
+```{python}
+print(completion.choices[0].message.role)
+```
+
+## Conclusiones
+
+- Este ejemplo muestra cómo configurar y hacer un request básico a la API.
+- Puedes cambiar el modelo (gpt-4o-mini, gpt-3.5-turbo, etc.) según tus necesidades.
+- El uso de Markdown en la salida más legible la respuesta.

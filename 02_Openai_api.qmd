@@ -1,0 +1,198 @@
+# Uso del system prompt y conversación con memoria
+
+## Objetivo
+
+En este tutorial aprenderás a:
+
+- Usar un **system prompt** para dar contexto al asistente.
+- Realizar llamadas con humor y estilo específico.
+- Construir una conversación con **memoria** de mensajes anteriores.
+- Encapsular la lógica de interacción en una función reutilizable.
+
+## Configuración Inicial
+
+Importamos librerías necesarias, cargamos la API key desde un `.env` y creamos un cliente de OpenAI.
+
+
+```{python}
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv('OPENAI_API_KEY')
+
+client = OpenAI(api_key=api_key)
+```
+
+## Función par enviar mensajes con system_promt
+
+Esta función permite enviar un prompt con rol system que define el estilo del asistente.
+
+
+```{python}
+def chat_with_system(system_prompt: str, user_prompt: str) -> str:
+    '''Realiza una llamada con system prompt'''
+    try:
+        response = client.chat.completions.create(
+            model='gpt-4o',
+            messages=[
+                {'role': 'system', 'content': system_prompt},
+                {'role': 'user', 'content': user_prompt}
+            ]
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f'Error: {str(e)}'
+```
+
+## Ejemplo de uso con humor y acento argentino
+
+
+```{python}
+system_prompt = '''Eres un asistente con increible sentido del humor, 
+que hace chistes de las tematicas que te solicitan,
+ademas tu acento es un muy marcado Argentino'''
+user_prompt = 'algo de borrachos'
+respuesta = chat_with_system(system_prompt, user_prompt)
+
+print(f'\nSystem Prompt: {system_prompt}')
+print(f'\nUser Prompt: {user_prompt}')
+print(f'\nRespuesta: {respuesta}')
+```
+
+## Crear conversación con memoria
+
+Vamos a construir una lista de messages que mantiene el historial de turnos
+
+
+```{python}
+messages = []
+system_prompt = '''Eres un asistente con increible sentido del humor, 
+que hace chistes de las tematicas que te solicitan,
+ademas tu acento es un muy marcado Argentino'''
+
+# Agregar un system prompt inicial
+messages.append({
+    'role': 'system',
+    'content': system_prompt
+})
+
+# Primera pregunta
+messages.append({
+    'role': 'user',
+    'content': 'Un chiste de borrachos'
+})
+
+# Obtener respuesta
+response = client.chat.completions.create(
+    model='gpt-4o-mini',
+    messages=messages
+)
+```
+
+
+```{python}
+assistant_response = response.choices[0].message.content
+assistant_response
+```
+
+
+```{python}
+messages.append({
+    'role': 'assistant',
+    'content': assistant_response
+})
+
+# Hacer una pregunta de seguimiento
+messages.append({
+    'role': 'user',
+    'content': 'Explicamelo'
+})
+
+# Obtener nueva respuesta
+response = client.chat.completions.create(
+    model='gpt-4o-mini',
+    messages=messages
+)
+
+# Guardar la nueva respuesta
+assistant_response = response.choices[0].message.content
+messages.append({
+    'role': 'assistant',
+    'content': assistant_response
+})
+
+print('\nSegunda respuesta:', assistant_response)
+```
+
+## Visualizar el historial de la conversación
+
+
+```{python}
+messages
+```
+
+## Función helper para conversación dinámica
+
+Esta función permite agregar mensajes manteniendo el historial automáticamente.
+
+
+```{python}
+def chat(prompt: str, message_history: list) -> str:
+    '''
+    Envía un mensaje y obtiene una respuesta manteniendo el historial
+    '''
+    if len(message_history) == 0:
+        system_prompt = 'Eres un asistente con increible sentido del humor, que hace chistes de las tematicas que te solicitan, ademas tu acento es un muy marcado Colombiano'
+        message_history.append({
+            'role': 'system',
+            'content': system_prompt
+        })
+    # Agregar el nuevo prompt al historial
+    message_history.append({
+        'role': 'user',
+        'content': prompt
+    })
+
+    # Obtener respuesta
+    response = client.chat.completions.create(
+        model='gpt-4o-mini',
+        messages=message_history
+    )
+
+    # Guardar y retornar la respuesta 
+    assistant_response = response.choices[0].message.content
+    message_history.append({
+        'role': 'assistant',
+        'content': assistant_response
+    })
+
+    return assistant_response
+```
+
+## Ejemplos con historial persistente
+
+
+```{python}
+messages_function = []
+chat('Un chiste de borrachos', messages_function)
+```
+
+
+```{python}
+chat('ahora de padres e hijos', messages_function)
+```
+
+
+```{python}
+messages_function
+```
+
+## Conclusiones
+
+- Puedes controlar el estilo del asistente con un system prompt.
+
+- Al guardar el historial en una lista, puedes mantener una conversación más coherente.
+
+- Encapsular la lógica de interacción permite reutilizarla de forma más sencilla.

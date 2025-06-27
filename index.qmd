@@ -1,0 +1,12 @@
+---
+title: "Domina el API de OpenAI - De Principiante a Experto"
+subtitle: "Tutoriales prácticos usando Python"
+---
+
+# Bienvenido {.unnumbered}
+
+Este libro recopila una serie de tutoriales para aprender a usar la API de OpenAI paso a paso.
+
+- Está escrito en Python
+- Puedes ver los resultados directamente
+- Es fácil de exportar a HTML y PDF
