@@ -2,6 +2,11 @@ project:
   type: book
   output-dir: docs
 
+
+# Cache global para evitar reejecución de código (como llamadas a API)
+execute:
+  cache: true
+
 book:
   title: "Domina el API de OpenAI - De Principiante a Experto"
   reader-mode: false

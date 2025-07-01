@@ -1,4 +1,27 @@
-.env
+# Entorno virtual
 venv/
+.env
+
+# Archivos y carpetas de Python
 __pycache__/
-/.quarto/
+*.py[cod]
+*.ipynb_checkpoints
+
+# Caché de Quarto
+.quarto/
+_cache/
+
+# Archivos temporales y de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de salida (puedes ignorarlos si no quieres subirlos)
+# docs/*.html
+# docs/*.pdf
+
+# Archivos de logs o temporales
+*.log
+*.tmp
+
+# Jupyter runtime
+.ipynb_checkpoints/

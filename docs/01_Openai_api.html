@@ -240,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="configuración-inicial" class="level2">
 <h2 class="anchored" data-anchor-id="configuración-inicial">Configuración Inicial</h2>
 <p>Importamos las librerías necesarias y cargamos las variables de entorno.</p>
-<div id="56ef175b" class="cell" data-execution_count="1">
+<div id="52cf10a9" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
@@ -254,7 +254,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="solicitud-a-la-api" class="level2">
 <h2 class="anchored" data-anchor-id="solicitud-a-la-api">Solicitud a la API</h2>
 <p>Usamos el modelo gpt-4o-mini para enviar un mensaje y obtener una respuesta.</p>
-<div id="539b4eeb" class="cell" data-execution_count="2">
+<div id="78f3f6d5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>completion <span class="op">=</span> client.chat.completions.create(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">'gpt-4o-mini'</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[</span>
@@ -269,97 +269,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ver-la-respuesta" class="level2">
 <h2 class="anchored" data-anchor-id="ver-la-respuesta">Ver la respuesta</h2>
 <p>Extraemos el contenido de la respuesta del asistente.</p>
-<div id="542e456f" class="cell" data-execution_count="3">
+<div id="3cb4c76c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>completion.choices[<span class="dv">0</span>].message</span></code></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>ChatCompletionMessage(content='¡Hola! Claro que sí, estaré encantado de ayudarte a aprender sobre la API de OpenAI. La API de OpenAI permite a los desarrolladores integrar modelos de lenguaje, como GPT-3 y GPT-4, en sus aplicaciones. Aquí tienes un resumen de los aspectos más importantes:\n\n### 1. **Introducción a la API**\n   - La API de OpenAI te permite generar texto, responder preguntas, traducir idiomas, resumir contenido, y más, utilizando modelos de inteligencia artificial avanzados.\n\n### 2. **Registro y Autenticación**\n   - Para usar la API, primero debes crear una cuenta en el sitio web de OpenAI y obtener una clave de API.\n   - La autenticación se realiza enviando tu clave de API en los encabezados de las solicitudes HTTP.\n\n### 3. **Puntos finales (Endpoints)**\n   - **Completions**: Para generar texto a partir de un texto inicial.\n   - **Chat Completions**: Diseñado para la interacción de tipo chat, útil para construir asistentes conversacionales.\n   - **Edits**: Para realizar ediciones o ajustes en un texto existente.\n\n### 4. **Realización de Solicitudes**\n   - Generalmente, haces una solicitud POST a la API con un cuerpo JSON que contiene los parámetros necesarios, como el modelo que deseas usar, el texto inicial, y otros configuraciones como `temperature`, `max_tokens`, etc.\n\n### 5. **Parámetros Comunes**\n   - **model**: El nombre del modelo que quieres usar (por ejemplo, "gpt-3.5-turbo").\n   - **prompt**: El texto inicial que alimentas al modelo.\n   - **max_tokens**: El número máximo de tokens (palabras y fragmentos de palabras) que deseas obtener como respuesta.\n   - **temperature**: Controla la aleatoriedad de las respuestas (valores más bajos generan respuestas más predecibles).\n   - **top_p**: Usado para la muestreo en el núcleo, controla la diversidad de las respuestas.\n\n### 6. **Uso Responsable**\n   - Es importante seguir las pautas de uso responsable proporcionadas por OpenAI, para evitar generar contenido perjudicial o malintencionado.\n\n### 7. **Ejemplo de Código**\nAquí tienes un simple ejemplo en Python utilizando `requests`:\n\n```python\nimport requests\n\napi_key = \'TU_CLAVE_DE_API\'\nheaders = {\n    \'Authorization\': f\'Bearer {api_key}\',\n    \'Content-Type\': \'application/json\',\n}\n\ndata = {\n    \'model\': \'gpt-3.5-turbo\',\n    \'messages\': [{\'role\': \'user\', \'content\': \'¿Qué es la inteligencia artificial?\'}],\n}\n\nresponse = requests.post(\'https://api.openai.com/v1/chat/completions\', headers=headers, json=data)\n\nprint(response.json())\n```\n\n### 8. **Documentación**\n   - Te recomiendo revisar la [documentación oficial de OpenAI](https://platform.openai.com/docs/) para obtener detalles más específicos sobre cada endpoint y sus características.\n\nSi tienes preguntas más específicas o necesitas ejemplos adicionales, ¡dímelo!', refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=None)</code></pre>
+<pre><code>ChatCompletionMessage(content='¡Hola! Claro, estaré encantado de ayudarte a aprender sobre la API de OpenAI. La API de OpenAI te permite integrar modelos de lenguaje, como GPT-3 y GPT-4, en tus propias aplicaciones. Aquí tienes un resumen de los conceptos básicos:\n\n### ¿Qué es la API de OpenAI?\n\nLa API de OpenAI proporciona acceso a varios modelos de inteligencia artificial que pueden realizar tareas de procesamiento del lenguaje natural. Esto incluye la generación de texto, la respuesta a preguntas, la traducción de idiomas y mucho más.\n\n### ¿Cómo funciona?\n\n1. **Solicitud y Respuesta**: Envías una solicitud a la API que incluye un "prompt" o entrada, y la API devuelve una respuesta generada por el modelo, basada en esa entrada.\n   \n2. **Modelos Disponibles**: OpenAI ofrece varios modelos, cada uno con diferentes capacidades y costos. GPT-3 y GPT-4 son los más conocidos por su habilidad en la generación de texto.\n\n3. **Uso de endpoints**: Para interactuar con la API, utilizarás diferentes endpoints que indican qué type de tarea deseas realizar (por ejemplo, completando texto, generando imágenes, etc.).\n\n### ¿Cómo comenzar?\n\n1. **Crear una cuenta**: Necesitarás registrarte en el sitio web de OpenAI y obtener una clave de API.\n\n2. **Instalación**: Puedes interactuar con la API utilizando bibliotecas como `requests` en Python. También hay SDKs disponibles en otros lenguajes.\n\n3. **Ejemplo de solicitud**:\n   Aquí hay un ejemplo básico de cómo realizar una solicitud en Python:\n\n   ```python\n   import openai\n\n   openai.api_key = \'tu_clave_de_api\'\n\n   response = openai.ChatCompletion.create(\n       model="gpt-4",\n       messages=[\n           {"role": "user", "content": "¿Qué es la inteligencia artificial?"}\n       ]\n   )\n\n   print(response[\'choices\'][0][\'message\'][\'content\'])\n   ```\n\n### Consideraciones importantes:\n\n- **Límites y costos**: La API tiene un costo que depende del uso, así que asegúrate de revisar la documentación para entender la estructura de precios y los límites de uso.\n\n- **Políticas de uso**: Es importante conocer y seguir las políticas de uso de OpenAI para asegurarte de que tu aplicación cumpla con las directrices éticas.\n\n### Recursos adicionales\n\n- **Documentación oficial**: La [documentación de OpenAI](https://platform.openai.com/docs) es el mejor lugar para obtener información detallada y ejemplos actualizados.\n\n- **Comunidad**: Participar en foros y comunidades en línea puede ser útil para resolver dudas y aprender de otros desarrolladores.\n\nSi tienes alguna pregunta más específica o necesitas información adicional, ¡no dudes en preguntar!', refusal=None, role='assistant', annotations=[], audio=None, function_call=None, tool_calls=None)</code></pre>
 </div>
 </div>
 </section>
 <section id="mostrar-la-respuesta-en-formato-markdown" class="level2">
 <h2 class="anchored" data-anchor-id="mostrar-la-respuesta-en-formato-markdown">Mostrar la respuesta en formato Markdown</h2>
 <p>Utilizamos IPyhton para mostrar el contenido como texto formateado.</p>
-<div id="03a14dba" class="cell" data-execution_count="4">
+<div id="9ada8973" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, Markdown</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>display(Markdown(completion.choices[<span class="dv">0</span>].message.content))</span></code></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p>¡Hola! Claro que sí, estaré encantado de ayudarte a aprender sobre la API de OpenAI. La API de OpenAI permite a los desarrolladores integrar modelos de lenguaje, como GPT-3 y GPT-4, en sus aplicaciones. Aquí tienes un resumen de los aspectos más importantes:</p>
-<section id="introducción-a-la-api" class="level3">
-<h3 class="anchored" data-anchor-id="introducción-a-la-api">1. <strong>Introducción a la API</strong></h3>
-<ul>
-<li>La API de OpenAI te permite generar texto, responder preguntas, traducir idiomas, resumir contenido, y más, utilizando modelos de inteligencia artificial avanzados.</li>
-</ul>
+<p>¡Hola! Claro, estaré encantado de ayudarte a aprender sobre la API de OpenAI. La API de OpenAI te permite integrar modelos de lenguaje, como GPT-3 y GPT-4, en tus propias aplicaciones. Aquí tienes un resumen de los conceptos básicos:</p>
+<section id="qué-es-la-api-de-openai" class="level3">
+<h3 class="anchored" data-anchor-id="qué-es-la-api-de-openai">¿Qué es la API de OpenAI?</h3>
+<p>La API de OpenAI proporciona acceso a varios modelos de inteligencia artificial que pueden realizar tareas de procesamiento del lenguaje natural. Esto incluye la generación de texto, la respuesta a preguntas, la traducción de idiomas y mucho más.</p>
 </section>
-<section id="registro-y-autenticación" class="level3">
-<h3 class="anchored" data-anchor-id="registro-y-autenticación">2. <strong>Registro y Autenticación</strong></h3>
-<ul>
-<li>Para usar la API, primero debes crear una cuenta en el sitio web de OpenAI y obtener una clave de API.</li>
-<li>La autenticación se realiza enviando tu clave de API en los encabezados de las solicitudes HTTP.</li>
-</ul>
+<section id="cómo-funciona" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-funciona">¿Cómo funciona?</h3>
+<ol type="1">
+<li><p><strong>Solicitud y Respuesta</strong>: Envías una solicitud a la API que incluye un “prompt” o entrada, y la API devuelve una respuesta generada por el modelo, basada en esa entrada.</p></li>
+<li><p><strong>Modelos Disponibles</strong>: OpenAI ofrece varios modelos, cada uno con diferentes capacidades y costos. GPT-3 y GPT-4 son los más conocidos por su habilidad en la generación de texto.</p></li>
+<li><p><strong>Uso de endpoints</strong>: Para interactuar con la API, utilizarás diferentes endpoints que indican qué type de tarea deseas realizar (por ejemplo, completando texto, generando imágenes, etc.).</p></li>
+</ol>
 </section>
-<section id="puntos-finales-endpoints" class="level3">
-<h3 class="anchored" data-anchor-id="puntos-finales-endpoints">3. <strong>Puntos finales (Endpoints)</strong></h3>
-<ul>
-<li><strong>Completions</strong>: Para generar texto a partir de un texto inicial.</li>
-<li><strong>Chat Completions</strong>: Diseñado para la interacción de tipo chat, útil para construir asistentes conversacionales.</li>
-<li><strong>Edits</strong>: Para realizar ediciones o ajustes en un texto existente.</li>
-</ul>
-</section>
-<section id="realización-de-solicitudes" class="level3">
-<h3 class="anchored" data-anchor-id="realización-de-solicitudes">4. <strong>Realización de Solicitudes</strong></h3>
-<ul>
-<li>Generalmente, haces una solicitud POST a la API con un cuerpo JSON que contiene los parámetros necesarios, como el modelo que deseas usar, el texto inicial, y otros configuraciones como <code>temperature</code>, <code>max_tokens</code>, etc.</li>
-</ul>
-</section>
-<section id="parámetros-comunes" class="level3">
-<h3 class="anchored" data-anchor-id="parámetros-comunes">5. <strong>Parámetros Comunes</strong></h3>
-<ul>
-<li><strong>model</strong>: El nombre del modelo que quieres usar (por ejemplo, “gpt-3.5-turbo”).</li>
-<li><strong>prompt</strong>: El texto inicial que alimentas al modelo.</li>
-<li><strong>max_tokens</strong>: El número máximo de tokens (palabras y fragmentos de palabras) que deseas obtener como respuesta.</li>
-<li><strong>temperature</strong>: Controla la aleatoriedad de las respuestas (valores más bajos generan respuestas más predecibles).</li>
-<li><strong>top_p</strong>: Usado para la muestreo en el núcleo, controla la diversidad de las respuestas.</li>
-</ul>
-</section>
-<section id="uso-responsable" class="level3">
-<h3 class="anchored" data-anchor-id="uso-responsable">6. <strong>Uso Responsable</strong></h3>
-<ul>
-<li>Es importante seguir las pautas de uso responsable proporcionadas por OpenAI, para evitar generar contenido perjudicial o malintencionado.</li>
-</ul>
-</section>
-<section id="ejemplo-de-código" class="level3">
-<h3 class="anchored" data-anchor-id="ejemplo-de-código">7. <strong>Ejemplo de Código</strong></h3>
-<p>Aquí tienes un simple ejemplo en Python utilizando <code>requests</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<section id="cómo-comenzar" class="level3">
+<h3 class="anchored" data-anchor-id="cómo-comenzar">¿Cómo comenzar?</h3>
+<ol type="1">
+<li><p><strong>Crear una cuenta</strong>: Necesitarás registrarte en el sitio web de OpenAI y obtener una clave de API.</p></li>
+<li><p><strong>Instalación</strong>: Puedes interactuar con la API utilizando bibliotecas como <code>requests</code> en Python. También hay SDKs disponibles en otros lenguajes.</p></li>
+<li><p><strong>Ejemplo de solicitud</strong>: Aquí hay un ejemplo básico de cómo realizar una solicitud en Python:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> openai</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>api_key <span class="op">=</span> <span class="st">'TU_CLAVE_DE_API'</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>headers <span class="op">=</span> {</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Authorization'</span>: <span class="ss">f'Bearer </span><span class="sc">{</span>api_key<span class="sc">}</span><span class="ss">'</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Content-Type'</span>: <span class="st">'application/json'</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'model'</span>: <span class="st">'gpt-3.5-turbo'</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'messages'</span>: [{<span class="st">'role'</span>: <span class="st">'user'</span>, <span class="st">'content'</span>: <span class="st">'¿Qué es la inteligencia artificial?'</span>}],</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.post(<span class="st">'https://api.openai.com/v1/chat/completions'</span>, headers<span class="op">=</span>headers, json<span class="op">=</span>data)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.json())</span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>openai.api_key <span class="op">=</span> <span class="st">'tu_clave_de_api'</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> openai.ChatCompletion.create(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">"gpt-4"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>[</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        {<span class="st">"role"</span>: <span class="st">"user"</span>, <span class="st">"content"</span>: <span class="st">"¿Qué es la inteligencia artificial?"</span>}</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response[<span class="st">'choices'</span>][<span class="dv">0</span>][<span class="st">'message'</span>][<span class="st">'content'</span>])</span></code></pre></div></li>
+</ol>
 </section>
-<section id="documentación" class="level3">
-<h3 class="anchored" data-anchor-id="documentación">8. <strong>Documentación</strong></h3>
+<section id="consideraciones-importantes" class="level3">
+<h3 class="anchored" data-anchor-id="consideraciones-importantes">Consideraciones importantes:</h3>
 <ul>
-<li>Te recomiendo revisar la <a href="https://platform.openai.com/docs/">documentación oficial de OpenAI</a> para obtener detalles más específicos sobre cada endpoint y sus características.</li>
+<li><p><strong>Límites y costos</strong>: La API tiene un costo que depende del uso, así que asegúrate de revisar la documentación para entender la estructura de precios y los límites de uso.</p></li>
+<li><p><strong>Políticas de uso</strong>: Es importante conocer y seguir las políticas de uso de OpenAI para asegurarte de que tu aplicación cumpla con las directrices éticas.</p></li>
 </ul>
-<p>Si tienes preguntas más específicas o necesitas ejemplos adicionales, ¡dímelo!</p>
+</section>
+<section id="recursos-adicionales" class="level3">
+<h3 class="anchored" data-anchor-id="recursos-adicionales">Recursos adicionales</h3>
+<ul>
+<li><p><strong>Documentación oficial</strong>: La <a href="https://platform.openai.com/docs">documentación de OpenAI</a> es el mejor lugar para obtener información detallada y ejemplos actualizados.</p></li>
+<li><p><strong>Comunidad</strong>: Participar en foros y comunidades en línea puede ser útil para resolver dudas y aprender de otros desarrolladores.</p></li>
+</ul>
+<p>Si tienes alguna pregunta más específica o necesitas información adicional, ¡no dudes en preguntar!</p>
 </section>
 </div>
 </div>
 </section>
 <section id="ver-el-rol-del-mensaje" class="level2">
 <h2 class="anchored" data-anchor-id="ver-el-rol-del-mensaje">Ver el rol del mensaje</h2>
-<div id="b4e0def1" class="cell" data-execution_count="5">
+<div id="09638e6f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(completion.choices[<span class="dv">0</span>].message.role)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>assistant</code></pre>
