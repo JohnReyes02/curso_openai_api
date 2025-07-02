@@ -1,0 +1,145 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Uso básico de la API de OpenAI\n",
+        "\n",
+        "Este tutorial muestra cómo usar la API de OpenAI con la biblioteca oficial\n",
+        "\n",
+        "\n",
+        "## Configuración Inicial\n",
+        "\n",
+        "Importamos las librerías necesarias y cargamos las variables de entorno.\n"
+      ],
+      "id": "752139f8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from openai import OpenAI\n",
+        "import os\n",
+        "from dotenv import load_dotenv\n",
+        "\n",
+        "load_dotenv()  # Carga el archivo de las variables de entorno\n",
+        "\n",
+        "api_key = os.getenv('OPENAI_API_KEY')\n",
+        "client = OpenAI(api_key=api_key)"
+      ],
+      "id": "23e0171c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Solicitud a la API\n",
+        "\n",
+        "Usamos el modelo gpt-4o-mini para enviar un mensaje y obtener una respuesta.\n"
+      ],
+      "id": "b05cb5fd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "completion = client.chat.completions.create(\n",
+        "    model='gpt-4o-mini',\n",
+        "    messages=[\n",
+        "        {\n",
+        "            'role': 'user',\n",
+        "            'content': '¡Hola! ¿Me ayudas a aprender sobre la API de OpenAI'\n",
+        "        }\n",
+        "    ]\n",
+        ")"
+      ],
+      "id": "399686ba",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Ver la respuesta\n",
+        "\n",
+        "Extraemos el contenido de la respuesta del asistente.\n"
+      ],
+      "id": "53a52a8e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "completion.choices[0].message"
+      ],
+      "id": "5009e635",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Mostrar la respuesta en formato Markdown\n",
+        "\n",
+        "Utilizamos IPyhton para mostrar el contenido como texto formateado.\n"
+      ],
+      "id": "662fdf9b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from IPython.display import display, Markdown\n",
+        "display(Markdown(completion.choices[0].message.content))"
+      ],
+      "id": "52d501db",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Ver el rol del mensaje\n"
+      ],
+      "id": "6cd654a2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(completion.choices[0].message.role)"
+      ],
+      "id": "7e75aac1",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Conclusiones\n",
+        "\n",
+        "- Este ejemplo muestra cómo configurar y hacer un request básico a la API.\n",
+        "- Puedes cambiar el modelo (gpt-4o-mini, gpt-3.5-turbo, etc.) según tus necesidades.\n",
+        "- El uso de Markdown en la salida más legible la respuesta."
+      ],
+      "id": "3b70cbd5"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/edwinmacmini/Documents/curso_openai_api/venv/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

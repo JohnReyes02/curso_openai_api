@@ -1,0 +1,316 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Uso del system prompt y conversación con memoria\n",
+        "\n",
+        "## Objetivo\n",
+        "\n",
+        "En este tutorial aprenderás a:\n",
+        "\n",
+        "- Usar un **system prompt** para dar contexto al asistente.\n",
+        "- Realizar llamadas con humor y estilo específico.\n",
+        "- Construir una conversación con **memoria** de mensajes anteriores.\n",
+        "- Encapsular la lógica de interacción en una función reutilizable.\n",
+        "\n",
+        "## Configuración Inicial\n",
+        "\n",
+        "Importamos librerías necesarias, cargamos la API key desde un `.env` y creamos un cliente de OpenAI.\n"
+      ],
+      "id": "bba8acbc"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from openai import OpenAI\n",
+        "import os\n",
+        "from dotenv import load_dotenv\n",
+        "\n",
+        "load_dotenv()\n",
+        "api_key = os.getenv('OPENAI_API_KEY')\n",
+        "\n",
+        "client = OpenAI(api_key=api_key)"
+      ],
+      "id": "c81195ab",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Función par enviar mensajes con system_promt\n",
+        "\n",
+        "Esta función permite enviar un prompt con rol system que define el estilo del asistente.\n"
+      ],
+      "id": "cf7e8a36"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def chat_with_system(system_prompt: str, user_prompt: str) -> str:\n",
+        "    '''Realiza una llamada con system prompt'''\n",
+        "    try:\n",
+        "        response = client.chat.completions.create(\n",
+        "            model='gpt-4o',\n",
+        "            messages=[\n",
+        "                {'role': 'system', 'content': system_prompt},\n",
+        "                {'role': 'user', 'content': user_prompt}\n",
+        "            ]\n",
+        "        )\n",
+        "        return response.choices[0].message.content\n",
+        "    except Exception as e:\n",
+        "        return f'Error: {str(e)}'"
+      ],
+      "id": "ef5083ce",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Ejemplo de uso con humor y acento argentino\n"
+      ],
+      "id": "283a8ebd"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "system_prompt = '''Eres un asistente con increible sentido del humor, \n",
+        "que hace chistes de las tematicas que te solicitan,\n",
+        "ademas tu acento es un muy marcado Argentino'''\n",
+        "user_prompt = 'algo de borrachos'\n",
+        "respuesta = chat_with_system(system_prompt, user_prompt)\n",
+        "\n",
+        "print(f'\\nSystem Prompt: {system_prompt}')\n",
+        "print(f'\\nUser Prompt: {user_prompt}')\n",
+        "print(f'\\nRespuesta: {respuesta}')"
+      ],
+      "id": "2cdb80d6",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Crear conversación con memoria\n",
+        "\n",
+        "Vamos a construir una lista de messages que mantiene el historial de turnos\n"
+      ],
+      "id": "3298e9a8"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "messages = []\n",
+        "system_prompt = '''Eres un asistente con increible sentido del humor, \n",
+        "que hace chistes de las tematicas que te solicitan,\n",
+        "ademas tu acento es un muy marcado Argentino'''\n",
+        "\n",
+        "# Agregar un system prompt inicial\n",
+        "messages.append({\n",
+        "    'role': 'system',\n",
+        "    'content': system_prompt\n",
+        "})\n",
+        "\n",
+        "# Primera pregunta\n",
+        "messages.append({\n",
+        "    'role': 'user',\n",
+        "    'content': 'Un chiste de borrachos'\n",
+        "})\n",
+        "\n",
+        "# Obtener respuesta\n",
+        "response = client.chat.completions.create(\n",
+        "    model='gpt-4o-mini',\n",
+        "    messages=messages\n",
+        ")"
+      ],
+      "id": "eb87a03e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "assistant_response = response.choices[0].message.content\n",
+        "assistant_response"
+      ],
+      "id": "088ebf61",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "messages.append({\n",
+        "    'role': 'assistant',\n",
+        "    'content': assistant_response\n",
+        "})\n",
+        "\n",
+        "# Hacer una pregunta de seguimiento\n",
+        "messages.append({\n",
+        "    'role': 'user',\n",
+        "    'content': 'Explicamelo'\n",
+        "})\n",
+        "\n",
+        "# Obtener nueva respuesta\n",
+        "response = client.chat.completions.create(\n",
+        "    model='gpt-4o-mini',\n",
+        "    messages=messages\n",
+        ")\n",
+        "\n",
+        "# Guardar la nueva respuesta\n",
+        "assistant_response = response.choices[0].message.content\n",
+        "messages.append({\n",
+        "    'role': 'assistant',\n",
+        "    'content': assistant_response\n",
+        "})\n",
+        "\n",
+        "print('\\nSegunda respuesta:', assistant_response)"
+      ],
+      "id": "b496e0aa",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Visualizar el historial de la conversación\n"
+      ],
+      "id": "87ec35ec"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "messages"
+      ],
+      "id": "641b6b97",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Función helper para conversación dinámica\n",
+        "\n",
+        "Esta función permite agregar mensajes manteniendo el historial automáticamente.\n"
+      ],
+      "id": "0cde3a57"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "def chat(prompt: str, message_history: list) -> str:\n",
+        "    '''\n",
+        "    Envía un mensaje y obtiene una respuesta manteniendo el historial\n",
+        "    '''\n",
+        "    if len(message_history) == 0:\n",
+        "        system_prompt = 'Eres un asistente con increible sentido del humor, que hace chistes de las tematicas que te solicitan, ademas tu acento es un muy marcado Colombiano'\n",
+        "        message_history.append({\n",
+        "            'role': 'system',\n",
+        "            'content': system_prompt\n",
+        "        })\n",
+        "    # Agregar el nuevo prompt al historial\n",
+        "    message_history.append({\n",
+        "        'role': 'user',\n",
+        "        'content': prompt\n",
+        "    })\n",
+        "\n",
+        "    # Obtener respuesta\n",
+        "    response = client.chat.completions.create(\n",
+        "        model='gpt-4o-mini',\n",
+        "        messages=message_history\n",
+        "    )\n",
+        "\n",
+        "    # Guardar y retornar la respuesta \n",
+        "    assistant_response = response.choices[0].message.content\n",
+        "    message_history.append({\n",
+        "        'role': 'assistant',\n",
+        "        'content': assistant_response\n",
+        "    })\n",
+        "\n",
+        "    return assistant_response"
+      ],
+      "id": "33c6365c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Ejemplos con historial persistente\n"
+      ],
+      "id": "b4f37a0d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "messages_function = []\n",
+        "chat('Un chiste de borrachos', messages_function)"
+      ],
+      "id": "57a1e34a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "chat('ahora de padres e hijos', messages_function)"
+      ],
+      "id": "4bd6e47d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "messages_function"
+      ],
+      "id": "7d5c9fab",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Conclusiones\n",
+        "\n",
+        "- Puedes controlar el estilo del asistente con un system prompt.\n",
+        "\n",
+        "- Al guardar el historial en una lista, puedes mantener una conversación más coherente.\n",
+        "\n",
+        "- Encapsular la lógica de interacción permite reutilizarla de forma más sencilla."
+      ],
+      "id": "bafd17b7"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/edwinmacmini/Documents/curso_openai_api/venv/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

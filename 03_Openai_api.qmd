@@ -156,3 +156,6 @@ Nucleus sampling: controla la diversidad seleccionando tokens cuya probabilidad 
 
 Nota: Generalmente se usa o 'temperature' o 'top_p', no ambos. Ejemplo de uso: top_p=0.9 Permite respuestas variadas pero coherentes.
 
+```{python}
+print('Hola')
+```

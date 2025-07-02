@@ -249,12 +249,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="configuración-inicial" class="level2">
 <h2 class="anchored" data-anchor-id="configuración-inicial">Configuración inicial</h2>
 <p>Importamos las librerías necesarias, cargamos la API key desde un .env y creamos el cliente de OpenAI.</p>
-<div id="b596ffe9" class="cell" data-execution_count="1">
+<div id="a4561cd2" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display, Markdown</span></code></pre></div>
 </div>
-<div id="0a53621b" class="cell" data-execution_count="2">
+<div id="f6c9b451" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>load_dotenv()</span>
@@ -272,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>1.0: Mayor creatividad y variabilidad</li>
 <li>2.0 Máxima aleatoriedad</li>
 </ul>
-<div id="a1049db0" class="cell" data-execution_count="3">
+<div id="ce209c1f" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">'las nubes estan algo grises verdad?'</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperatura baja (0.2)</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>response_conservador <span class="op">=</span> client.chat.completions.create(</span>
@@ -285,13 +285,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <p>Miramos la respuesta conservadora:</p>
-<div id="9159726d" class="cell" data-execution_count="4">
+<div id="37d38622" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>display(Markdown(response_conservador.choices[<span class="dv">0</span>].message.content))</span></code></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p>Sí, parece que las nubes están grises. Esto suele indicar que pueden estar cargadas de humedad y que podría llover pronto. ¿Estás esperando algún tipo de clima específico?</p>
+<p>Sí, parece que las nubes están grises. Esto suele indicar que pueden estar cargadas de humedad y que podría llover pronto. ¿Estás esperando algún tipo de clima en particular?</p>
 </div>
 </div>
-<div id="b3868c98" class="cell" data-execution_count="5">
+<div id="c609c847" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperatura alta (1.8)</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>response_creativo <span class="op">=</span> client.chat.completions.create(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">'gpt-4o-mini'</span>,</span>
@@ -303,14 +303,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <p>Miremos ahora la respuesta creativa:</p>
-<div id="9527508d" class="cell" data-execution_count="6">
+<div id="af659852" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>display(Markdown(response_creativo.choices[<span class="dv">0</span>].message.content))</span></code></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p>Sí, parecen estar un poco grises. A menudo, cuando las nubes son de ese color, puede ser señal de que se aproxima algo de lluvia. Pero también pueden verse así sin que necesariamente llueva. ¿Tienes planes para salir hoy?</p>
+<p>Sí, parece que las nubes están un poco grises, lo que podría indicar que podría venir lluvia o un cambio en el clima. ¿Hay alguna actividad planeada para hoy?</p>
 </div>
 </div>
 <p>Probemos ahora con otro ejemplo</p>
-<div id="b72c79d2" class="cell" data-execution_count="7">
+<div id="e3dcb840" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>prompt <span class="op">=</span> <span class="st">'Genera un eslogan para una cafeteria en la luna'</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Temperatura baja (0.2)</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>response_conservador <span class="op">=</span> client.chat.completions.create(</span>
@@ -333,17 +333,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <p>Miramos la respuesta conservadora:</p>
-<div id="965fdb32" class="cell" data-execution_count="8">
+<div id="53a8bc84" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>display(Markdown(response_conservador.choices[<span class="dv">0</span>].message.content))</span></code></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p>“¡Sabor a estrellas en cada sorbo! Ven a disfrutar en nuestra cafetería lunar.”</p>
+<p>“¡Sabor a otro mundo! Disfruta tu café entre estrellas en nuestra cafetería lunar.”</p>
 </div>
 </div>
 <p>Miremos ahora la respuesta creativa:</p>
-<div id="992d195b" class="cell" data-execution_count="9">
+<div id="2e4362d7" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>display(Markdown(response_creativo.choices[<span class="dv">0</span>].message.content))</span></code></pre></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<p>“¡Disfruta de cada sorbo en gravedad cero, donde el café tiene sabor a estrellas!” 🌌☕✨</p>
+<p>“Refresca tu alma, un sorbo cerca de las estrellas: Café Lunar!” 🌌☕✨</p>
 </div>
 </div>
 </section>
@@ -356,7 +356,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Medio (100-500): Ideal para respuestas generales</li>
 <li>Alto (&gt;1000): Para generación de contenido extenso</li>
 </ul>
-<div id="8889f2b3" class="cell" data-execution_count="10">
+<div id="833bb12d" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Respuesta corta</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>response_corta <span class="op">=</span> client.chat.completions.create(</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    model<span class="op">=</span><span class="st">'gpt-4o-mini'</span>,</span>
@@ -372,16 +372,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <p>Imprimimos los mensajes</p>
-<div id="efb99eee" class="cell" data-execution_count="11">
+<div id="028b4e3e" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response_corta.choices[<span class="dv">0</span>].message.content)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">100</span><span class="op">*</span><span class="st">'-'</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response_larga.choices[<span class="dv">0</span>].message.content)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Un atardecer es un espectáculo natural que ocurre cuando el sol se oculta en el horizonte, marcando el final del día y el inicio de la noche. En este momento, el cielo se transforma en un lienzo vibrante, donde los
+<pre><code>Un atardecer es un espectáculo natural que se presenta cada día, cuando el sol desciende por el horizonte, pintando el cielo con una paleta de colores vibrantes. A medida que el sol se oculta, el cielo se transforma
 ----------------------------------------------------------------------------------------------------
-El atardecer es un espectáculo natural que transforma el cielo en una paleta vibrante de colores cálidos. A medida que el sol desciende en el horizonte, sus rayos dorados iluminan las nubes, tiñéndolas de tonos anaranjados, rosas y púrpuras. El aire se vuelve más fresco y se llena de un suave murmullo, ya sea el canto de los pájaros que regresan a sus nidos o el susurro del viento entre los árboles.
+Un atardecer es un espectáculo natural que transforma el cielo y el paisaje en un lienzo de colores. A medida que el sol comienza a descender en el horizonte, la luz se vuelve más suave y cálida, proyectando tonos de naranja, rosa, dorado y púrpura que se entrelazan en las nubes. La luz del día se va desvaneciendo, creando una atmósfera de tranquilidad y reflexión.
 
-Las sombras se alargan y la luz comienza a desvanecerse lentamente, creando un ambiente de calma y reflexión. Los paisajes cambian, revelando siluetas más marcadas y un brillo especial en la naturaleza que invita a la contemplación. Es un momento mágico, en el que el día se despide y la noche se asoma con el promesa de un nuevo comienzo. Cada atardecer es único, lleno de matices que inv</code></pre>
+El aire se siente fresco, especialmente después de un día cálido. Los sonidos de la naturaleza se mezclan en un canto armonioso: el murmullo de las hojas, el canto de los pájaros que regresan a sus nidos, y en algunas ocasiones, el suave susurro del viento. Si te encuentras cerca de un cuerpo de agua, puedes ver cómo los colores del cielo se reflejan en la superficie, creando una imagen casi mágica.
+
+A medida que el sol se oculta, el cielo comienza a osc</code></pre>
 </div>
 </div>
 </section>
@@ -394,6 +396,12 @@ Las sombras se alargan y la luz comienza a desvanecerse lentamente, creando un a
 <li>0.9: Mayor variabilidad en el vocabulario.</li>
 </ul>
 <p>Nota: Generalmente se usa o ‘temperature’ o ‘top_p’, no ambos. Ejemplo de uso: top_p=0.9 Permite respuestas variadas pero coherentes.</p>
+<div id="02c0f343" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Hola'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hola</code></pre>
+</div>
+</div>
 
 
 </section>
