@@ -6,6 +6,7 @@ project:
 # Cache global para evitar reejecución de código (como llamadas a API)
 execute:
   cache: true
+  freeze: auto
 
 book:
   title: "Domina el API de OpenAI - De Principiante a Experto"
@@ -30,6 +31,7 @@ book:
       chapters:
         - 01_Openai_api.qmd
         - 02_Openai_api.qmd
+        - 03_Openai_api.qmd
 
 format:
   html:

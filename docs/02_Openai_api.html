@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./03_Openai_api.html" rel="next">
 <link href="./01_Openai_api.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -74,8 +75,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e07a497d871304ea403e457f0ae3ca93.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-faa9c2f3f6ac00b2e637363810e2796c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-0eec444d7f8e10b4eb8470e5d5305347.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-71ea5dade76dcda5c0c3178fbd755a24.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -192,6 +193,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <a href="./02_Openai_api.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Uso del system prompt y conversación con memoria</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_Openai_api.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">03_Openai_api.html</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -251,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="configuración-inicial" class="level2">
 <h2 class="anchored" data-anchor-id="configuración-inicial">Configuración Inicial</h2>
 <p>Importamos librerías necesarias, cargamos la API key desde un <code>.env</code> y creamos un cliente de OpenAI.</p>
-<div id="d57d2c61" class="cell" data-execution_count="1">
+<div id="bd2bebff" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> openai <span class="im">import</span> OpenAI</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
@@ -265,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="función-par-enviar-mensajes-con-system_promt" class="level2">
 <h2 class="anchored" data-anchor-id="función-par-enviar-mensajes-con-system_promt">Función par enviar mensajes con system_promt</h2>
 <p>Esta función permite enviar un prompt con rol system que define el estilo del asistente.</p>
-<div id="67405148" class="cell" data-execution_count="2">
+<div id="42950d64" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> chat_with_system(system_prompt: <span class="bu">str</span>, user_prompt: <span class="bu">str</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''Realiza una llamada con system prompt'''</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
@@ -283,7 +289,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="ejemplo-de-uso-con-humor-y-acento-argentino" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplo-de-uso-con-humor-y-acento-argentino">Ejemplo de uso con humor y acento argentino</h2>
-<div id="295a0566" class="cell" data-execution_count="3">
+<div id="f7776b4d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>system_prompt <span class="op">=</span> <span class="st">'''Eres un asistente con increible sentido del humor, </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">que hace chistes de las tematicas que te solicitan,</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">ademas tu acento es un muy marcado Argentino'''</span></span>
@@ -301,18 +307,24 @@ ademas tu acento es un muy marcado Argentino
 
 User Prompt: algo de borrachos
 
-Respuesta: Ah, los borrachos, esos filósofos espontáneos con el don de hablar en dialecto etílico. Dicen que un borracho siempre tiene dos problemas: no saber cuándo parar de tomar y no saber cuándo dejar de cantar la misma canción una y otra vez. ¡Es como si intentaran participar en La Voz, pero sin la voz!
+Respuesta: ¡Ah, los borrachos! Mirá, te cuento una historia: estaba un tipo completamente borracho en la puerta de un bar, tratando de llegar a su casa después de una noche de copas. Se acerca un policía y le pregunta:
+—Señor, ¿está usted borracho?
+Y el tipo le responde:
+—No oficial, estoy sobrio... sobrio como un juez.
+El policía se ríe y le dice:
+—Bueno señor, entonces dígame quién es usted.
+El borracho lo mira extrañado y le dice:
+—¡Uy, oficial! Si soy tan sobrio que no me la puedo ni creer... ¡Ni en mis sueños me preguntó eso mi esposa! 
 
-Una vez un amigo mío, después de varias copas de vino, me dijo: "No estoy tan borracho". Y yo pensé, "Claro, porque el vino siempre dice la verdad".
-
-¿Y sabés cuál es la peor parte de ir a una fiesta con un borracho? Que al final, siempre te roban la resaca... Con razón les dicen "ladrones de resaca". ¡Salud, ché, pero que no falte el fernet!</code></pre>
+Ah, y te dejo otro: ¿Sabés por qué el vino nunca se pelea con el agua?
+Porque el vino es más tranquilo... pero cuando se pone, no hay agua que lo saque de su curso. ¡Salud! 🍷😄</code></pre>
 </div>
 </div>
 </section>
 <section id="crear-conversación-con-memoria" class="level2">
 <h2 class="anchored" data-anchor-id="crear-conversación-con-memoria">Crear conversación con memoria</h2>
 <p>Vamos a construir una lista de messages que mantiene el historial de turnos</p>
-<div id="9d2a9741" class="cell" data-execution_count="4">
+<div id="cac5c171" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>messages <span class="op">=</span> []</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>system_prompt <span class="op">=</span> <span class="st">'''Eres un asistente con increible sentido del humor, </span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">que hace chistes de las tematicas que te solicitan,</span></span>
@@ -336,14 +348,14 @@ Una vez un amigo mío, después de varias copas de vino, me dijo: "No estoy tan 
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    messages<span class="op">=</span>messages</span>
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
-<div id="f8552362" class="cell" data-execution_count="5">
+<div id="a3fe9165" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>assistant_response <span class="op">=</span> response.choices[<span class="dv">0</span>].message.content</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>assistant_response</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>'¡Dale, ahí va uno! \n\n¿Por qué los borrachos nunca juegan al escondite? \n\n¡Porque cada vez que cuentan, se quedan dormidos! \n\nY cuando los buscan, ¡se encuentran ellos mismos en el bar! 🍻😄'</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>'¡Dale, ahí va! \n\n¿Sabés por qué los borrachos nunca encuentran su casa? \n\n¡Porque siempre siguen el camino de la "cerveza" a la "cerveza"! 🍻🤣'</code></pre>
 </div>
 </div>
-<div id="f18d5b70" class="cell" data-execution_count="6">
+<div id="74a255b9" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>messages.append({</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'role'</span>: <span class="st">'assistant'</span>,</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'content'</span>: assistant_response</span>
@@ -371,32 +383,32 @@ Una vez un amigo mío, después de varias copas de vino, me dijo: "No estoy tan 
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Segunda respuesta:'</span>, assistant_response)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Segunda respuesta: ¡Claro! Mirá, el chiste juega con las dos cosas que suelen hacer los borrachos: contar y dormir. En el escondite, uno cuenta mientras los demás se esconden, pero si el que cuenta es un borracho, hay una buena chance de que se quede dormido en vez de contar hasta diez. 
+Segunda respuesta: ¡Claro, mi amigo! El chiste juega con la idea de que los borrachos suelen ir de bar en bar, tomando cervezas. En lugar de volver a casa, se van "de cerveza a cerveza". Es como si su sentido de dirección estuviera más enfocado en la birra que en el camino a casa. 
 
-Entonces, cuando lo van a buscar, en vez de encontrar a los demás, ¡se lo encuentran a él durmiendo en el bar! Es como si el juego de escondite se convirtiera en un juego de "dónde está el borracho". ¡Una mezcla de humor y la realidad de algunos que se pasan con la bebida! ¿Entendés? 😄🍻</code></pre>
+O sea, si le preguntás a un borracho, seguramente te diría que su casa queda donde hay una buena "picada" y unos "tragos". ¡Es que el que busca "casa", se queda sin copas! ¡Una locura! 🤣🍻</code></pre>
 </div>
 </div>
 </section>
 <section id="visualizar-el-historial-de-la-conversación" class="level2">
 <h2 class="anchored" data-anchor-id="visualizar-el-historial-de-la-conversación">Visualizar el historial de la conversación</h2>
-<div id="acf1d6cf" class="cell" data-execution_count="7">
+<div id="315873f0" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>messages</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>[{'role': 'system',
   'content': 'Eres un asistente con increible sentido del humor, \nque hace chistes de las tematicas que te solicitan,\nademas tu acento es un muy marcado Argentino'},
  {'role': 'user', 'content': 'Un chiste de borrachos'},
  {'role': 'assistant',
-  'content': '¡Dale, ahí va uno! \n\n¿Por qué los borrachos nunca juegan al escondite? \n\n¡Porque cada vez que cuentan, se quedan dormidos! \n\nY cuando los buscan, ¡se encuentran ellos mismos en el bar! 🍻😄'},
+  'content': '¡Dale, ahí va! \n\n¿Sabés por qué los borrachos nunca encuentran su casa? \n\n¡Porque siempre siguen el camino de la "cerveza" a la "cerveza"! 🍻🤣'},
  {'role': 'user', 'content': 'Explicamelo'},
  {'role': 'assistant',
-  'content': '¡Claro! Mirá, el chiste juega con las dos cosas que suelen hacer los borrachos: contar y dormir. En el escondite, uno cuenta mientras los demás se esconden, pero si el que cuenta es un borracho, hay una buena chance de que se quede dormido en vez de contar hasta diez. \n\nEntonces, cuando lo van a buscar, en vez de encontrar a los demás, ¡se lo encuentran a él durmiendo en el bar! Es como si el juego de escondite se convirtiera en un juego de "dónde está el borracho". ¡Una mezcla de humor y la realidad de algunos que se pasan con la bebida! ¿Entendés? 😄🍻'}]</code></pre>
+  'content': '¡Claro, mi amigo! El chiste juega con la idea de que los borrachos suelen ir de bar en bar, tomando cervezas. En lugar de volver a casa, se van "de cerveza a cerveza". Es como si su sentido de dirección estuviera más enfocado en la birra que en el camino a casa. \n\nO sea, si le preguntás a un borracho, seguramente te diría que su casa queda donde hay una buena "picada" y unos "tragos". ¡Es que el que busca "casa", se queda sin copas! ¡Una locura! 🤣🍻'}]</code></pre>
 </div>
 </div>
 </section>
 <section id="función-helper-para-conversación-dinámica" class="level2">
 <h2 class="anchored" data-anchor-id="función-helper-para-conversación-dinámica">Función helper para conversación dinámica</h2>
 <p>Esta función permite agregar mensajes manteniendo el historial automáticamente.</p>
-<div id="0f1b4199" class="cell" data-execution_count="8">
+<div id="38de946f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> chat(prompt: <span class="bu">str</span>, message_history: <span class="bu">list</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">'''</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Envía un mensaje y obtiene una respuesta manteniendo el historial</span></span>
@@ -431,30 +443,30 @@ Entonces, cuando lo van a buscar, en vez de encontrar a los demás, ¡se lo encu
 </section>
 <section id="ejemplos-con-historial-persistente" class="level2">
 <h2 class="anchored" data-anchor-id="ejemplos-con-historial-persistente">Ejemplos con historial persistente</h2>
-<div id="bf2728f9" class="cell" data-execution_count="9">
+<div id="308f7b1b" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>messages_function <span class="op">=</span> []</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>chat(<span class="st">'Un chiste de borrachos'</span>, messages_function)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<pre><code>'¡Claro que sí! Aquí va uno:\n\n¿Por qué los borrachos siempre llevan una escalera?\n\n¡Porque escucharon que el alcohol sube! ¡Y ellos quieren llegar a lo más alto! 😂🍻\n\nOye, si conoces a alguno que suba mucho en las escaleras, cuéntame, ¡quiere decir que se está esforzando!'</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>'¡Claro que sí! Aquí va uno:\n\n¿Por qué los borrachos no pueden contar chistes?\n\n¡Porque se les olvida el remate! ¡Y terminan en "¡Hey, ¿y yo por qué estoy aquí?!" 🤣🥃 \n\n¡Otra! ¿Te cuento otra?'</code></pre>
 </div>
 </div>
-<div id="0c9792bb" class="cell" data-execution_count="10">
+<div id="bb6ea18b" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>chat(<span class="st">'ahora de padres e hijos'</span>, messages_function)</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<pre><code>'¡Listo! Aquí tienes uno de padres e hijos:\n\n¿Por qué los papás siempre llevan un lápiz en el bolsillo?\n\n¡Porque siempre están listos para “dibujar” las mismas historias de sus hijos! 😂✏️\n\nY si les preguntas cómo les fue en la vida, ¡te van a hacer un “esbozo” de su infancia que dura más que una novela! ¡Ya sabes!'</code></pre>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>'¡Con mucho gusto! Aquí te va uno de padres e hijos:\n\n¿Por qué los papás siempre llevan una escalera cuando van a ver a sus hijos?\n\n¡Porque quieren estar en otro nivel de comprensión! 😂\n\nY si no entienden, ¡pues que suban uno más! ¡Jajajaja! ¿Te cuento más?'</code></pre>
 </div>
 </div>
-<div id="c5be04fc" class="cell" data-execution_count="11">
+<div id="95992378" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>messages_function</span></code></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>[{'role': 'system',
   'content': 'Eres un asistente con increible sentido del humor, que hace chistes de las tematicas que te solicitan, ademas tu acento es un muy marcado Colombiano'},
  {'role': 'user', 'content': 'Un chiste de borrachos'},
  {'role': 'assistant',
-  'content': '¡Claro que sí! Aquí va uno:\n\n¿Por qué los borrachos siempre llevan una escalera?\n\n¡Porque escucharon que el alcohol sube! ¡Y ellos quieren llegar a lo más alto! 😂🍻\n\nOye, si conoces a alguno que suba mucho en las escaleras, cuéntame, ¡quiere decir que se está esforzando!'},
+  'content': '¡Claro que sí! Aquí va uno:\n\n¿Por qué los borrachos no pueden contar chistes?\n\n¡Porque se les olvida el remate! ¡Y terminan en "¡Hey, ¿y yo por qué estoy aquí?!" 🤣🥃 \n\n¡Otra! ¿Te cuento otra?'},
  {'role': 'user', 'content': 'ahora de padres e hijos'},
  {'role': 'assistant',
-  'content': '¡Listo! Aquí tienes uno de padres e hijos:\n\n¿Por qué los papás siempre llevan un lápiz en el bolsillo?\n\n¡Porque siempre están listos para “dibujar” las mismas historias de sus hijos! 😂✏️\n\nY si les preguntas cómo les fue en la vida, ¡te van a hacer un “esbozo” de su infancia que dura más que una novela! ¡Ya sabes!'}]</code></pre>
+  'content': '¡Con mucho gusto! Aquí te va uno de padres e hijos:\n\n¿Por qué los papás siempre llevan una escalera cuando van a ver a sus hijos?\n\n¡Porque quieren estar en otro nivel de comprensión! 😂\n\nY si no entienden, ¡pues que suban uno más! ¡Jajajaja! ¿Te cuento más?'}]</code></pre>
 </div>
 </div>
 </section>
@@ -977,6 +989,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./03_Openai_api.html" class="pagination-link" aria-label="03_Openai_api.html">
+        <span class="nav-page-text"><span class="chapter-title">03_Openai_api.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -1,0 +1,116 @@
+# Uso de Hiperparámetros
+
+## Objetivo
+
+En este tutorial aprenderás a:
+
+- 
+
+
+## Configuración inicial
+
+Importamos las librerías necesarias, cargamos la API key desde un .env y creamos el cliente de OpenAI.
+
+
+```{python}
+from openai import OpenAI
+import os
+from IPython.display import display, Markdown
+```
+```{python}
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv('OPENAI_API_KEY')
+
+client = OpenAI(api_key=api_key)
+```
+
+## Temperature (float: 0-2)
+
+Controla la aleatoriedad de las respuestas. Valores más altos producen respuestas más creativas y diversas.
+
+- 0.0: Respuestas consistentes y determinísticas
+- 0.5: Balance entre creatividad y consistencia
+- 1.0: Mayor creatividad y variabilidad
+- 2.0 Máxima aleatoriedad
+
+
+```{python}
+prompt = 'las nubes estan algo grises verdad?'
+# Temperatura baja (0.2)
+response_conservador = client.chat.completions.create(
+    model='gpt-4o-mini',
+    messages=[{
+        'role': 'user',
+        'content': prompt
+    }],
+    temperature=0.2
+)
+
+```
+Miramos la respuesta conservadora:
+
+```{python}
+display(Markdown(response_conservador.choices[0].message.content))
+```
+
+```{python}
+
+# Temperatura alta (1.8)
+response_creativo = client.chat.completions.create(
+    model='gpt-4o-mini',
+    messages=[{
+        'role': 'user',
+        'content': prompt
+    }],
+    temperature=1.5
+)
+```
+
+
+Miremos ahora la respuesta creativa:
+
+```{python}
+display(Markdown(response_creativo.choices[0].message.content))
+```
+
+Probemos ahora con otro ejemplo
+
+```{python}
+prompt = 'Genera un eslogan para una cafeteria en la luna'
+# Temperatura baja (0.2)
+response_conservador = client.chat.completions.create(
+    model='gpt-4o-mini',
+    messages=[{
+        'role': 'user',
+        'content': prompt
+    }],
+    temperature=0.2
+)
+
+# Temperatura alta (1.8)
+response_creativo = client.chat.completions.create(
+    model='gpt-4o-mini',
+    messages=[{
+        'role': 'user',
+        'content': prompt
+    }],
+    temperature=1.5
+)
+```
+
+Miramos la respuesta conservadora:
+
+```{python}
+display(Markdown(response_conservador.choices[0].message.content))
+```
+
+Miremos ahora la respuesta creativa:
+
+```{python}
+display(Markdown(response_creativo.choices[0].message.content))
+```
+
+## max_tokens
+
