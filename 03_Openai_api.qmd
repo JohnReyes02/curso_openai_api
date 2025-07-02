@@ -114,3 +114,35 @@ display(Markdown(response_creativo.choices[0].message.content))
 
 ## max_tokens
 
+Define la longitud máxima de la respuesta en tokens. Un token equivale a 4 caracteres o 3/4 de una palabra promedio en ingles.
+
+Consideraciones:
+
+- Muy bajo (<50): Las respuestas pueden quedar incompletas
+- Medio (100-500): Ideal para respuestas generales
+- Alto (>1000): Para generación de contenido extenso
+
+```{python}
+# Respuesta corta
+response_corta = client.chat.completions.create(
+    model='gpt-4o-mini',
+    messages=[{'role': 'user', 'content': 'Describe un atardecer'}],
+    max_tokens=50
+)
+
+# Respuesta larga
+response_larga = client.chat.completions.create(
+    model='gpt-4o-mini',
+    messages=[{'role': 'user', 'content': 'Describe un atardecer'}],
+    max_tokens=200
+)
+```
+
+Imprimimos los mensajes
+
+```{python}
+print(response_corta.choices[0].message.content)
+print(100*'-')
+print(response_larga.choices[0].message.content)
+```
+
