@@ -1,0 +1,308 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# Uso de Hiperparámetros\n",
+        "\n",
+        "## Objetivo\n",
+        "\n",
+        "En este tutorial aprenderás a:\n",
+        "\n",
+        "- \n",
+        "\n",
+        "\n",
+        "## Configuración inicial\n",
+        "\n",
+        "Importamos las librerías necesarias, cargamos la API key desde un .env y creamos el cliente de OpenAI.\n"
+      ],
+      "id": "75c2e4a4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from openai import OpenAI\n",
+        "import os\n",
+        "from IPython.display import display, Markdown"
+      ],
+      "id": "1366af3d",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from dotenv import load_dotenv\n",
+        "\n",
+        "load_dotenv()\n",
+        "api_key = os.getenv('OPENAI_API_KEY')\n",
+        "\n",
+        "client = OpenAI(api_key=api_key)"
+      ],
+      "id": "dba5c113",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## Temperature (float: 0-2)\n",
+        "\n",
+        "Controla la aleatoriedad de las respuestas. Valores más altos producen respuestas más creativas y diversas.\n",
+        "\n",
+        "- 0.0: Respuestas consistentes y determinísticas\n",
+        "- 0.5: Balance entre creatividad y consistencia\n",
+        "- 1.0: Mayor creatividad y variabilidad\n",
+        "- 2.0 Máxima aleatoriedad\n"
+      ],
+      "id": "bf167190"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "prompt = 'las nubes estan algo grises verdad?'\n",
+        "# Temperatura baja (0.2)\n",
+        "response_conservador = client.chat.completions.create(\n",
+        "    model='gpt-4o-mini',\n",
+        "    messages=[{\n",
+        "        'role': 'user',\n",
+        "        'content': prompt\n",
+        "    }],\n",
+        "    temperature=0.2\n",
+        ")"
+      ],
+      "id": "2479891c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Miramos la respuesta conservadora:\n"
+      ],
+      "id": "bdbd1afe"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "display(Markdown(response_conservador.choices[0].message.content))"
+      ],
+      "id": "5390f564",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Temperatura alta (1.8)\n",
+        "response_creativo = client.chat.completions.create(\n",
+        "    model='gpt-4o-mini',\n",
+        "    messages=[{\n",
+        "        'role': 'user',\n",
+        "        'content': prompt\n",
+        "    }],\n",
+        "    temperature=1.5\n",
+        ")"
+      ],
+      "id": "9637a870",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Miremos ahora la respuesta creativa:\n"
+      ],
+      "id": "ca66f913"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "display(Markdown(response_creativo.choices[0].message.content))"
+      ],
+      "id": "54959f9a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Probemos ahora con otro ejemplo\n"
+      ],
+      "id": "19486ece"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "prompt = 'Genera un eslogan para una cafeteria en la luna'\n",
+        "# Temperatura baja (0.2)\n",
+        "response_conservador = client.chat.completions.create(\n",
+        "    model='gpt-4o-mini',\n",
+        "    messages=[{\n",
+        "        'role': 'user',\n",
+        "        'content': prompt\n",
+        "    }],\n",
+        "    temperature=0.2\n",
+        ")\n",
+        "\n",
+        "# Temperatura alta (1.8)\n",
+        "response_creativo = client.chat.completions.create(\n",
+        "    model='gpt-4o-mini',\n",
+        "    messages=[{\n",
+        "        'role': 'user',\n",
+        "        'content': prompt\n",
+        "    }],\n",
+        "    temperature=1.5\n",
+        ")"
+      ],
+      "id": "19201ac2",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Miramos la respuesta conservadora:\n"
+      ],
+      "id": "2ba85d89"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "display(Markdown(response_conservador.choices[0].message.content))"
+      ],
+      "id": "d514a9d5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Miremos ahora la respuesta creativa:\n"
+      ],
+      "id": "d2392f77"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "display(Markdown(response_creativo.choices[0].message.content))"
+      ],
+      "id": "2297db6b",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## max_tokens\n",
+        "\n",
+        "Define la longitud máxima de la respuesta en tokens. Un token equivale a 4 caracteres o 3/4 de una palabra promedio en ingles.\n",
+        "\n",
+        "Consideraciones:\n",
+        "\n",
+        "- Muy bajo (<50): Las respuestas pueden quedar incompletas\n",
+        "- Medio (100-500): Ideal para respuestas generales\n",
+        "- Alto (>1000): Para generación de contenido extenso\n"
+      ],
+      "id": "24f7645b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# Respuesta corta\n",
+        "response_corta = client.chat.completions.create(\n",
+        "    model='gpt-4o-mini',\n",
+        "    messages=[{'role': 'user', 'content': 'Describe un atardecer'}],\n",
+        "    max_tokens=50\n",
+        ")\n",
+        "\n",
+        "# Respuesta larga\n",
+        "response_larga = client.chat.completions.create(\n",
+        "    model='gpt-4o-mini',\n",
+        "    messages=[{'role': 'user', 'content': 'Describe un atardecer'}],\n",
+        "    max_tokens=200\n",
+        ")"
+      ],
+      "id": "8fc57dbf",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Imprimimos los mensajes\n"
+      ],
+      "id": "f45c6b48"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "print(response_corta.choices[0].message.content)\n",
+        "print(100*'-')\n",
+        "print(response_larga.choices[0].message.content)"
+      ],
+      "id": "f539925f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## top_p (float: 0-1)\n",
+        "\n",
+        "Nucleus sampling: controla la diversidad seleccionando tokens cuya probabilidad suma 'top_p'.\n",
+        "\n",
+        "- 0.1: Muy conservador, usa solo las palabras más probables.\n",
+        "- 0.5: Balance entre diversidad y precisión.\n",
+        "- 0.9: Mayor variabilidad en el vocabulario.\n",
+        "\n",
+        "Nota: Generalmente se usa o 'temperature' o 'top_p', no ambos. Ejemplo de uso: top_p=0.9 Permite respuestas variadas pero coherentes.\n"
+      ],
+      "id": "7962d1fe"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "for top_p in [0.1, 0.5, 0.9]:\n",
+        "    response = client.chat.completions.create(\n",
+        "\n",
+        "    )"
+      ],
+      "id": "822c1711",
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/edwinmacmini/Documents/curso_openai_api/venv/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
