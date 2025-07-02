@@ -156,10 +156,3 @@ Nucleus sampling: controla la diversidad seleccionando tokens cuya probabilidad 
 
 Nota: Generalmente se usa o 'temperature' o 'top_p', no ambos. Ejemplo de uso: top_p=0.9 Permite respuestas variadas pero coherentes.
 
-
-```{python}
-for top_p in [0.1, 0.5, 0.9]:
-    response = client.chat.completions.create(
-
-    )
-```

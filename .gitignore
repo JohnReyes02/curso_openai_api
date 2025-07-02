@@ -2,28 +2,30 @@
 venv/
 .env
 
-# Archivos y carpetas de Python
+# Archivos de Python
 __pycache__/
 *.py[cod]
 *.ipynb_checkpoints
 
-# Caché de Quarto
-.quarto/
+# Archivos generados por Jupyter y Quarto
+.jupyter_cache/
 _cache/
+_freeze/
+.quarto/
 
-# Archivos temporales y de sistema
+# Archivos temporales y del sistema
 .DS_Store
 Thumbs.db
-
-# Archivos de salida (puedes ignorarlos si no quieres subirlos)
-# docs/*.html
-# docs/*.pdf
-
-# Archivos de logs o temporales
 *.log
 *.tmp
 
-# Jupyter runtime
-.ipynb_checkpoints/
+# Archivos de lock de entornos
+poetry.lock
+Pipfile.lock
+*.sqlite3
+
+# Opcional: si quieres ignorar todo el contenido generado en docs/
+# (solo hazlo si NO estás usando GitHub Pages)
+# docs/
 
 /.quarto/
