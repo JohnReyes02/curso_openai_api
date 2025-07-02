@@ -10,8 +10,13 @@ __pycache__/
 # Archivos generados por Jupyter y Quarto
 .jupyter_cache/
 _cache/
+<<<<<<< HEAD
 _freeze/
 .quarto/
+=======
+.jupyter_cache/
+
+>>>>>>> 00c2839 (arreglos)
 
 # Archivos temporales y del sistema
 .DS_Store
